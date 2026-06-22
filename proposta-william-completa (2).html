@@ -1,0 +1,515 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Proposta Estratégica Completa — William Buongiovanni</title>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;1,300;1,400&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet">
+<style>
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+  :root {
+    --preto: #1A1A18; --offwhite: #FAFAF7; --dourado: #C9A96E;
+    --cinza: #6B6B68; --cinza-claro: #E8E8E5;
+  }
+  html { scroll-behavior: smooth; }
+  body {
+    background: var(--offwhite); color: var(--preto);
+    font-family: 'DM Sans', sans-serif; font-size: 16px; line-height: 1.6; overflow-x: hidden;
+  }
+
+  /* NAV */
+  .nav {
+    position: sticky; top: 0; z-index: 100;
+    background: rgba(26,26,24,0.97); backdrop-filter: blur(8px);
+    padding: 14px 48px; display: flex; gap: 28px; align-items: center;
+    border-bottom: 1px solid rgba(201,169,110,0.15);
+    overflow-x: auto; white-space: nowrap;
+  }
+  .nav-logo { width: 30px; height: 30px; flex-shrink: 0; margin-right: 4px; }
+  .nav a {
+    color: rgba(250,250,247,0.55); text-decoration: none; font-size: 11px;
+    letter-spacing: 0.1em; text-transform: uppercase; transition: color 0.2s;
+  }
+  .nav a:hover, .nav a.active { color: var(--dourado); }
+
+  /* HERO */
+  .hero {
+    background: var(--preto); min-height: 92vh; display: flex; flex-direction: column;
+    justify-content: center; padding: 64px 48px; position: relative; overflow: hidden;
+  }
+  .hero::before {
+    content: ''; position: absolute; top: 0; right: 0; width: 40%; height: 100%;
+    background: linear-gradient(135deg, transparent 40%, rgba(201,169,110,0.06) 100%); pointer-events: none;
+  }
+  .hero-eyebrow { font-size: 11px; font-weight: 400; letter-spacing: 0.25em; text-transform: uppercase; color: var(--dourado); margin-bottom: 32px; }
+  .hero-title { font-family: 'Cormorant Garamond', serif; font-size: clamp(42px, 6vw, 78px); font-weight: 300; line-height: 1.08; color: var(--offwhite); max-width: 740px; margin-bottom: 24px; }
+  .hero-title em { font-style: italic; color: var(--dourado); }
+  .hero-sub { font-size: 15px; font-weight: 300; color: rgba(250,250,247,0.55); max-width: 540px; margin-bottom: 48px; line-height: 1.8; }
+  .hero-meta { display: flex; gap: 40px; flex-wrap: wrap; }
+  .hero-meta-item label { display: block; font-size: 10px; letter-spacing: 0.2em; text-transform: uppercase; color: var(--dourado); margin-bottom: 4px; }
+  .hero-meta-item span { font-family: 'Cormorant Garamond', serif; font-size: 16px; color: var(--offwhite); font-weight: 400; }
+
+  section { padding: 88px 48px; max-width: 980px; margin: 0 auto; }
+  .section-eyebrow { font-size: 10px; letter-spacing: 0.25em; text-transform: uppercase; color: var(--dourado); margin-bottom: 20px; display: flex; align-items: center; gap: 12px; }
+  .section-eyebrow::after { content: ''; flex: 1; height: 1px; background: var(--dourado); opacity: 0.25; max-width: 48px; }
+  .section-title { font-family: 'Cormorant Garamond', serif; font-size: clamp(30px, 4vw, 46px); font-weight: 400; line-height: 1.2; margin-bottom: 24px; }
+  .section-title em { font-style: italic; color: var(--dourado); }
+  .section-body { font-size: 15px; font-weight: 300; color: var(--cinza); line-height: 1.8; max-width: 620px; }
+
+  .divider { height: 1px; background: linear-gradient(90deg, transparent, var(--dourado), transparent); opacity: 0.15; margin: 0 48px; }
+
+  /* DIAGNÓSTICO */
+  .diagnostico-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 2px; margin-top: 48px; background: var(--cinza-claro); }
+  .diagnostico-item { background: var(--offwhite); padding: 32px; }
+  .diagnostico-item.destaque { background: var(--preto); }
+  .diagnostico-item.destaque .diagnostico-label { color: var(--offwhite); }
+  .diagnostico-item.destaque .diagnostico-text { color: rgba(250,250,247,0.6); }
+  .diagnostico-numero { font-family: 'Cormorant Garamond', serif; font-size: 13px; color: var(--dourado); margin-bottom: 10px; letter-spacing: 0.1em; }
+  .diagnostico-label { font-family: 'Cormorant Garamond', serif; font-size: 20px; font-weight: 500; margin-bottom: 8px; line-height: 1.2; }
+  .diagnostico-text { font-size: 13px; font-weight: 300; color: var(--cinza); line-height: 1.7; }
+
+  /* CASES DE MERCADO */
+  .case-card { background: var(--offwhite); border: 1px solid var(--cinza-claro); padding: 32px; margin-bottom: 2px; }
+  .case-header { display: flex; justify-content: space-between; align-items: baseline; margin-bottom: 12px; flex-wrap: wrap; gap: 8px; }
+  .case-nome { font-family: 'Cormorant Garamond', serif; font-size: 22px; font-weight: 500; }
+  .case-local { font-size: 10px; letter-spacing: 0.1em; text-transform: uppercase; color: var(--dourado); }
+  .case-numeros { display: flex; gap: 20px; margin: 14px 0; flex-wrap: wrap; }
+  .case-num-item label { display: block; font-size: 8px; letter-spacing: 0.1em; text-transform: uppercase; color: var(--dourado); margin-bottom: 2px; }
+  .case-num-item span { font-family: 'Cormorant Garamond', serif; font-size: 16px; font-weight: 500; }
+  .case-body { font-size: 13px; font-weight: 300; color: var(--cinza); line-height: 1.7; }
+  .case-destaque { background: var(--preto); padding: 18px 22px; margin-top: 14px; }
+  .case-destaque p { font-size: 12px; font-weight: 300; color: rgba(250,250,247,0.75); line-height: 1.7; }
+  .case-destaque strong { color: var(--dourado); font-weight: 500; }
+
+  .insight-box { background: var(--offwhite); border: 1px solid var(--cinza-claro); border-left: 3px solid var(--dourado); padding: 26px 30px; margin: 40px 0; }
+  .insight-eyebrow { font-size: 9px; letter-spacing: 0.2em; text-transform: uppercase; color: var(--dourado); margin-bottom: 10px; }
+  .insight-box h3 { font-family: 'Cormorant Garamond', serif; font-size: 19px; font-weight: 500; margin-bottom: 10px; }
+  .insight-box p { font-size: 13px; font-weight: 300; color: var(--cinza); line-height: 1.8; }
+  .insight-box strong { color: var(--preto); font-weight: 500; }
+
+  /* TABS DE CANAIS */
+  .tabs-nav { display: flex; gap: 2px; margin-top: 48px; background: var(--cinza-claro); }
+  .tab-btn {
+    flex: 1; padding: 18px; background: var(--offwhite); border: none; cursor: pointer;
+    font-family: 'DM Sans', sans-serif; font-size: 12px; letter-spacing: 0.1em; text-transform: uppercase;
+    color: var(--cinza); transition: all 0.2s;
+  }
+  .tab-btn.active { background: var(--preto); color: var(--dourado); }
+  .tab-content { display: none; padding: 40px; background: var(--offwhite); border: 1px solid var(--cinza-claro); border-top: none; }
+  .tab-content.active { display: block; }
+
+  .canal-header { display: flex; justify-content: space-between; align-items: flex-start; margin-bottom: 28px; flex-wrap: wrap; gap: 16px; }
+  .canal-titulo { font-family: 'Cormorant Garamond', serif; font-size: 30px; font-weight: 400; }
+  .canal-titulo em { font-style: italic; color: var(--dourado); }
+  .canal-freq-badge { background: var(--preto); color: var(--dourado); padding: 8px 18px; font-size: 11px; letter-spacing: 0.1em; text-transform: uppercase; white-space: nowrap; }
+
+  .canal-funcao { font-size: 14px; font-weight: 300; color: var(--cinza); line-height: 1.8; margin-bottom: 28px; max-width: 600px; }
+  .canal-funcao strong { color: var(--preto); font-weight: 500; }
+
+  .entrega-lista { list-style: none; margin-bottom: 28px; }
+  .entrega-lista li {
+    font-size: 13px; font-weight: 300; color: var(--cinza); padding: 10px 0;
+    border-bottom: 1px solid var(--cinza-claro); padding-left: 18px; position: relative; line-height: 1.6;
+  }
+  .entrega-lista li::before { content: '·'; position: absolute; left: 0; color: var(--dourado); font-size: 18px; line-height: 1; }
+  .entrega-lista li strong { color: var(--preto); font-weight: 500; }
+
+  .quem-faz { background: var(--preto); padding: 24px 28px; margin-top: 20px; }
+  .quem-faz-eyebrow { font-size: 9px; letter-spacing: 0.2em; text-transform: uppercase; color: var(--dourado); margin-bottom: 12px; }
+  .quem-faz p { font-size: 13px; font-weight: 300; color: rgba(250,250,247,0.7); line-height: 1.7; }
+  .quem-faz strong { color: var(--offwhite); font-weight: 500; }
+
+  @media (max-width: 768px) {
+    .hero, section { padding: 56px 24px; }
+    .diagnostico-grid { grid-template-columns: 1fr; }
+    .tabs-nav { flex-direction: column; }
+    .tab-content { padding: 24px; }
+    .nav { padding: 14px 20px; gap: 20px; }
+    .hero-meta { gap: 24px; }
+  }
+</style>
+</head>
+<body>
+
+<nav class="nav">
+  <img src="data:image/png;base64,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" class="nav-logo" alt="Daniela Paiva">
+  <a href="#diagnostico">Diagnóstico</a>
+  <a href="#mercado">Mercado</a>
+  <a href="#formato">Formato</a>
+  <a href="#canais">Canais</a>
+  <a href="#evolucao">Evolução</a>
+  <a href="#cronograma">Cronograma</a>
+  <a href="#corretores">Corretores</a>
+  <a href="#investimento">Investimento</a>
+</nav>
+
+<div class="hero">
+  <p class="hero-eyebrow">Proposta Estratégica Completa · Junho 2026</p>
+  <h1 class="hero-title">O endereço do seu <em>sonho</em>, construído todos os dias.</h1>
+  <p class="hero-sub">Uma estratégia integrada e detalhada para transformar presença digital em autoridade real no mercado imobiliário do litoral paulista, com cronograma de execução, papéis definidos e resultado mensurável.</p>
+  <div class="hero-meta">
+    <div class="hero-meta-item"><label>Preparado por</label><span>Daniela Paiva</span></div>
+    <div class="hero-meta-item"><label>Para</label><span>William Buongiovanni</span></div>
+    <div class="hero-meta-item"><label>Versão</label><span>Proposta revisada · 2ª reunião</span></div>
+  </div>
+</div>
+
+<!-- DIAGNÓSTICO -->
+<section id="diagnostico">
+  <p class="section-eyebrow">Ponto de partida</p>
+  <h2 class="section-title">O que conversamos<br><em>e o que isso revelou.</em></h2>
+  <p class="section-body">Depois de ouvir o que você trouxe na nossa conversa, ficou claro que a oportunidade é maior do que apenas postar imóveis. É construir autoridade real, com método e consistência.</p>
+
+  <div class="diagnostico-grid">
+    <div class="diagnostico-item destaque">
+      <p class="diagnostico-numero">01</p>
+      <p class="diagnostico-label">Os vídeos de autoridade já funcionaram</p>
+      <p class="diagnostico-text">Os vídeos gravados anteriormente sobre financiamento, riscos e bastidores geraram audiência real. Esse formato comprovadamente funciona e será a espinha dorsal da nova estratégia.</p>
+    </div>
+    <div class="diagnostico-item">
+      <p class="diagnostico-numero">02</p>
+      <p class="diagnostico-label">Conteúdo sem padrão definido</p>
+      <p class="diagnostico-text">Os vídeos de imóveis até então não seguem um formato reconhecível. Isso significa que cada publicação compete do zero pela atenção, em vez de construir expectativa ao longo do tempo.</p>
+    </div>
+    <div class="diagnostico-item">
+      <p class="diagnostico-numero">03</p>
+      <p class="diagnostico-label">Estrutura de produção já validada</p>
+      <p class="diagnostico-text">A edição dos vídeos de imóveis com apoio de inteligência artificial, mostrando a simulação de mobília em imóveis vazios, é uma solução inteligente que libera tempo para focar em estratégia e autoridade.</p>
+    </div>
+    <div class="diagnostico-item destaque">
+      <p class="diagnostico-numero">04</p>
+      <p class="diagnostico-label">11 corretores, uma oportunidade não explorada</p>
+      <p class="diagnostico-text">Cada corretor com sua especialidade representa uma fonte de conteúdo diversificado. Hoje essa força não está sendo usada de forma coordenada.</p>
+    </div>
+  </div>
+</section>
+
+<div class="divider"></div>
+
+<!-- PESQUISA DE MERCADO -->
+<section id="mercado">
+  <p class="section-eyebrow">Pesquisa de mercado</p>
+  <h2 class="section-title">Como os corretores de elite<br>constroem <em>autoridade real.</em></h2>
+  <p class="section-body">Antes de propor qualquer estratégia, fomos olhar o que está funcionando para os maiores nomes do mercado imobiliário digital no Brasil, incluindo referências diretas de Santa Catarina.</p>
+
+  <div style="margin-top: 40px; display: flex; flex-direction: column; gap: 2px;">
+    <div class="case-card">
+      <div class="case-header">
+        <span class="case-nome">Guilherme Pilger</span>
+        <span class="case-local">Balneário Camboriú · SC</span>
+      </div>
+      <div class="case-numeros">
+        <div class="case-num-item"><label>Instagram</label><span>197 mil</span></div>
+        <div class="case-num-item"><label>TikTok</label><span>210 mil</span></div>
+        <div class="case-num-item"><label>YouTube</label><span>120 mil</span></div>
+      </div>
+      <p class="case-body">Construiu um dos maiores canais de conteúdo imobiliário do Brasil criando um formato reconhecível em vez de postar imóveis soltos.</p>
+      <div class="case-destaque">
+        <p><strong>O que ele fez de diferente:</strong> criou uma série com identidade própria documentando negociações de imóveis de alto padrão, transformando cada vídeo em algo esperado pela audiência, não ignorado como anúncio.</p>
+      </div>
+    </div>
+    <div class="case-card">
+      <div class="case-header">
+        <span class="case-nome">Guilherme Wohlke</span>
+        <span class="case-local">Balneário Camboriú · SC</span>
+      </div>
+      <div class="case-numeros">
+        <div class="case-num-item"><label>Instagram</label><span>30 mil+</span></div>
+        <div class="case-num-item"><label>Posicionamento</label><span>Alto padrão</span></div>
+      </div>
+      <p class="case-body">Construiu autoridade entre os próprios corretores que o seguem, se tornando referência através de consistência, não de volume.</p>
+      <div class="case-destaque">
+        <p><strong>Frase que resume sua estratégia:</strong> "a postagem diária é uma necessidade, é preciso ter a consistência de aparecer todos os dias."</p>
+      </div>
+    </div>
+  </div>
+
+  <div class="insight-box">
+    <p class="insight-eyebrow">O dado mais importante da pesquisa</p>
+    <h3>YouTube converte. Instagram converte. TikTok constrói marca.</h3>
+    <p>Segundo um dos corretores mais respeitados do Brasil em mídia digital: o YouTube é o canal que mais converte vendas reais. O Instagram converte também, em menor proporção. O TikTok funciona como construção de marca, colocando o profissional na mente do público mesmo antes da intenção de compra existir. <strong>Essa é exatamente a lógica aplicada nesta proposta: cada canal com uma função clara, não repetição do mesmo conteúdo em formatos diferentes.</strong></p>
+  </div>
+</section>
+
+<div class="divider"></div>
+
+<!-- FORMATO DA SÉRIE -->
+<section id="formato">
+  <p class="section-eyebrow">Identidade de conteúdo</p>
+  <h2 class="section-title">Uma série com nome,<br>não <em>posts soltos.</em></h2>
+  <p class="section-body">Em vez de cada imóvel competir do zero pela atenção, criamos um formato reconhecível. A audiência aprende a esperar o próximo capítulo, em vez de rolar a tela sem prestar atenção.</p>
+
+  <div style="background: var(--preto); padding: 48px; text-align: center; margin-top: 40px;">
+    <p style="font-size: 9px; letter-spacing: 0.2em; text-transform: uppercase; color: var(--dourado); margin-bottom: 16px;">Nome da série</p>
+    <p style="font-family: 'Cormorant Garamond', serif; font-size: 36px; font-style: italic; color: var(--offwhite); margin-bottom: 16px;">"O Endereço do Seu Sonho"</p>
+    <p style="font-size: 13px; font-weight: 300; color: rgba(250,250,247,0.6); max-width: 520px; margin: 0 auto; line-height: 1.7;">Reaproveitando o slogan que já existe na sua marca, "Nós temos o endereço do seu sonho". Cada imóvel em destaque se torna um episódio numerado, com identidade visual própria, criando reconhecimento ao longo do tempo.</p>
+  </div>
+
+  <div class="tabs-nav" style="margin-top: 48px;">
+    <button class="tab-btn active" onclick="showDia(0, this)">Segunda</button>
+    <button class="tab-btn" onclick="showDia(1, this)">Quarta</button>
+    <button class="tab-btn" onclick="showDia(2, this)">Sexta</button>
+  </div>
+  <div class="tab-content active" id="dia-0">
+    <h3 class="canal-titulo">O <em>bairro</em></h3>
+    <p class="canal-funcao" style="margin-top: 16px;">Apresentação da região onde está o imóvel da semana. Infraestrutura, comércio, segurança, valorização. Mostra o contexto antes de mostrar a casa, porque ninguém compra um endereço sem entender o que existe ao redor dele.</p>
+  </div>
+  <div class="tab-content" id="dia-1">
+    <h3 class="canal-titulo">A <em>casa</em></h3>
+    <p class="canal-funcao" style="margin-top: 16px;">Tour completo pelo imóvel, com os diferenciais e detalhes de acabamento em destaque. É o coração visual da semana, onde o produto em si é protagonista.</p>
+  </div>
+  <div class="tab-content" id="dia-2">
+    <h3 class="canal-titulo">Lazer e <em>estilo de vida</em></h3>
+    <p class="canal-funcao" style="margin-top: 16px;">Áreas comuns, espaços de lazer, e a sensação de como seria viver ali. Vende a experiência, não só a planta do imóvel.</p>
+  </div>
+</section>
+
+<div class="divider"></div>
+
+<!-- CANAIS DETALHADOS -->
+<section id="canais">
+  <p class="section-eyebrow">Estratégia por canal</p>
+  <h2 class="section-title">Três canais,<br>três <em>funções distintas.</em></h2>
+  <p class="section-body">Cada plataforma tem um papel específico na jornada de quem ainda não te conhece até quem já está pronto para comprar.</p>
+
+  <div class="tabs-nav" style="margin-top: 48px;">
+    <button class="tab-btn active" onclick="showCanal(0, this)">Instagram</button>
+    <button class="tab-btn" onclick="showCanal(1, this)">YouTube</button>
+    <button class="tab-btn" onclick="showCanal(2, this)">TikTok</button>
+  </div>
+
+  <div class="tab-content active" id="canal-0">
+    <div class="canal-header">
+      <h3 class="canal-titulo">Insta<em>gram</em></h3>
+      <span class="canal-freq-badge">3x por semana</span>
+    </div>
+    <p class="canal-funcao"><strong>Função no funil:</strong> relacionamento e conversão direta. É onde quem já te conhece acompanha de perto, tira dúvidas e decide agendar uma visita. Segunda, quarta e sexta, seguindo o formato "O Endereço do Seu Sonho".</p>
+    <ul class="entrega-lista">
+      <li><strong>Segunda, quarta e sexta:</strong> episódio da série sobre o imóvel da semana</li>
+      <li><strong>Stories diários:</strong> bastidores, perguntas respondidas, urgência de quem está procurando</li>
+      <li><strong>Conteúdo de autoridade intercalado:</strong> documentação, financiamento, mercado local</li>
+      <li><strong>Padronização visual</strong> alinhada com a identidade que está sendo construída</li>
+    </ul>
+    <div class="quem-faz">
+      <p class="quem-faz-eyebrow">Quem faz</p>
+      <p><strong>Daniela</strong> publica, responde estrategicamente e monitora métricas. <strong>Editora com IA</strong> entrega os vídeos de imóveis prontos para publicação.</p>
+    </div>
+  </div>
+
+  <div class="tab-content" id="canal-1">
+    <div class="canal-header">
+      <h3 class="canal-titulo">You<em>Tube</em></h3>
+      <span class="canal-freq-badge">1x por semana</span>
+    </div>
+    <p class="canal-funcao"><strong>Função no funil:</strong> autoridade e conversão de longo prazo. É o canal que mais converte venda real, segundo os dados de mercado. Onde quem está pesquisando antes de decidir busca respostas, antes mesmo de falar com qualquer corretor.</p>
+    <ul class="entrega-lista">
+      <li><strong>1 vídeo por semana</strong>, alternando entre autoridade e tour de imóvel em destaque</li>
+      <li><strong>Vídeos de autoridade:</strong> documentação, financiamento, bairros em desenvolvimento, cuidados na compra e locação</li>
+      <li><strong>Vídeos de imóvel:</strong> versão estendida do episódio da semana, com mais profundidade do que o Instagram permite</li>
+      <li><strong>Links diretos para o sistema Praedio</strong> em cada vídeo de imóvel</li>
+      <li><strong>Otimização de título e descrição</strong> para aparecer em buscas no Google e no YouTube</li>
+    </ul>
+    <div class="quem-faz">
+      <p class="quem-faz-eyebrow">Quem faz</p>
+      <p><strong>William e Daniela</strong> gravam juntos na sessão quinzenal presencial. <strong>Daniela</strong> edita e publica os vídeos de autoridade.</p>
+    </div>
+  </div>
+
+  <div class="tab-content" id="canal-2">
+    <div class="canal-header">
+      <h3 class="canal-titulo">Tik<em>Tok</em></h3>
+      <span class="canal-freq-badge">2x por semana</span>
+    </div>
+    <p class="canal-funcao"><strong>Função no funil:</strong> construção de marca e alcance. Segundo os dados de mercado, esse canal não gera conversão direta no curto prazo, mas coloca o profissional na mente do público antes da intenção de compra existir.</p>
+    <ul class="entrega-lista">
+      <li><strong>2 vídeos por semana</strong> para começar, ritmo de validação</li>
+      <li><strong>Vídeos curtos e diretos</strong>, adaptados da linguagem do Instagram, sem produção elaborada</li>
+      <li><strong>Foco em alcance</strong>, não em métricas de conversão nos primeiros 60 dias</li>
+      <li><strong>Avaliação no 2º mês</strong> para decidir se aumenta o ritmo de publicação</li>
+    </ul>
+    <div class="quem-faz">
+      <p class="quem-faz-eyebrow">Quem faz</p>
+      <p><strong>Daniela</strong> adapta conteúdo já gravado no Instagram e YouTube para o formato TikTok.</p>
+    </div>
+  </div>
+</section>
+
+<div class="divider"></div>
+
+<!-- ESCADA DE EVOLUÇÃO -->
+<section id="evolucao">
+  <p class="section-eyebrow">Como isso evolui</p>
+  <h2 class="section-title">Uma construção,<br>não uma <em>promessa solta.</em></h2>
+  <p class="section-body">Nenhum trabalho de presença digital acontece da noite para o dia. Por isso a proposta começa com <strong style="color: var(--preto);">um mês independente</strong>, com objetivo próprio e sem compromisso automático com nada além dele. Só depois desse mês, com resultado em mãos, decidimos juntos o próximo passo.</p>
+
+  <div style="margin-top: 48px; display: flex; flex-direction: column; gap: 2px; background: var(--cinza-claro);">
+    <div style="background: var(--preto); padding: 32px 36px;">
+      <p style="font-size: 9px; letter-spacing: 0.2em; text-transform: uppercase; color: var(--dourado); margin-bottom: 10px;">Etapa 1 · Mês 1, isolado</p>
+      <p style="font-family: 'Cormorant Garamond', serif; font-size: 22px; color: var(--offwhite); margin-bottom: 10px;">Fundação</p>
+      <p style="font-size: 13px; font-weight: 300; color: rgba(250,250,247,0.6); line-height: 1.8;">Construção da identidade visual consistente nos três canais. Abertura e configuração do YouTube e TikTok. Primeiras gravações com o formato "O Endereço do Seu Sonho" no ar. Palestra de alinhamento com os corretores. Esse mês é contratado e entregue de forma independente, sem nenhum compromisso futuro embutido.</p>
+    </div>
+
+    <div style="background: var(--dourado); padding: 26px 36px; text-align: center;">
+      <p style="font-size: 11px; letter-spacing: 0.15em; text-transform: uppercase; color: var(--preto); font-weight: 500;">Ponto de decisão, ao final do mês 1</p>
+      <p style="font-size: 13px; font-weight: 400; color: var(--preto); margin-top: 6px; max-width: 560px; margin-left: auto; margin-right: auto;">Você avalia o que foi entregue. Se fizer sentido continuar, seguimos para um novo ciclo. Se não fizer sentido, encerramos ali, sem burocracia.</p>
+    </div>
+
+    <div style="background: var(--offwhite); padding: 32px 36px;">
+      <p style="font-size: 9px; letter-spacing: 0.2em; text-transform: uppercase; color: var(--dourado); margin-bottom: 10px;">Etapa 2 · Caso opte por continuar · Ciclo de 3 meses</p>
+      <p style="font-family: 'Cormorant Garamond', serif; font-size: 22px; margin-bottom: 10px;">Consistência e ajuste</p>
+      <p style="font-size: 13px; font-weight: 300; color: var(--cinza); line-height: 1.8;">Com a fundação já entregue no mês 1, esse novo ciclo de três meses é sobre observar como o público responde, ajustar o que não está funcionando, e aumentar o ritmo do que está gerando resultado. É aqui que a consistência se transforma em reconhecimento real.</p>
+    </div>
+    <div style="background: var(--preto); padding: 32px 36px;">
+      <p style="font-size: 9px; letter-spacing: 0.2em; text-transform: uppercase; color: var(--dourado); margin-bottom: 10px;">Ao final desse novo ciclo</p>
+      <p style="font-family: 'Cormorant Garamond', serif; font-size: 22px; color: var(--offwhite); margin-bottom: 10px;">Decisão com dados na mão</p>
+      <p style="font-size: 13px; font-weight: 300; color: rgba(250,250,247,0.6); line-height: 1.8;">Relatório completo do que foi construído, o que funcionou, e o que vale a pena escalar. Nenhuma continuidade é assumida sem que você veja, com clareza, o que esse investimento gerou.</p>
+    </div>
+  </div>
+</section>
+
+<div class="divider"></div>
+
+<!-- CRONOGRAMA SEMANAL -->
+<section id="cronograma">
+  <p class="section-eyebrow">Como funciona na prática</p>
+  <h2 class="section-title">O que é pedido,<br>e o que é <em>entregue</em>, toda semana.</h2>
+  <p class="section-body">Depois de experiências anteriores, ficou claro que clareza operacional evita frustração. Por isso, nada aqui fica no campo da promessa: aqui está exatamente o que cada parte precisa fazer, semana a semana.</p>
+
+  <div style="margin-top: 48px; display: flex; flex-direction: column; gap: 2px; background: var(--cinza-claro);">
+    <div style="background: var(--preto); padding: 28px 32px;">
+      <p style="font-size: 9px; letter-spacing: 0.2em; text-transform: uppercase; color: var(--dourado); margin-bottom: 10px;">A cada 15 dias</p>
+      <p style="font-family: 'Cormorant Garamond', serif; font-size: 20px; color: var(--offwhite); margin-bottom: 8px;">Sessão de gravação presencial</p>
+      <p style="font-size: 13px; font-weight: 300; color: rgba(250,250,247,0.6); line-height: 1.7;">Daniela se desloca até o escritório. 2 a 3 horas de gravação: vídeos de autoridade para YouTube e Instagram, roteiro definido previamente. William só precisa estar disponível e preparado, nada mais.</p>
+    </div>
+    <div style="background: var(--offwhite); padding: 28px 32px;">
+      <p style="font-size: 9px; letter-spacing: 0.2em; text-transform: uppercase; color: var(--dourado); margin-bottom: 10px;">Toda semana, segunda</p>
+      <p style="font-family: 'Cormorant Garamond', serif; font-size: 20px; margin-bottom: 8px;">Escolha do imóvel da semana</p>
+      <p style="font-size: 13px; font-weight: 300; color: var(--cinza); line-height: 1.7;"><strong style="color: var(--preto);">William ou corretor responsável</strong> indica o imóvel em destaque. <strong style="color: var(--preto);">Corretor</strong> grava o tour bruto no celular e envia para a editora.</p>
+    </div>
+    <div style="background: var(--offwhite); padding: 28px 32px;">
+      <p style="font-size: 9px; letter-spacing: 0.2em; text-transform: uppercase; color: var(--dourado); margin-bottom: 10px;">Durante a semana</p>
+      <p style="font-family: 'Cormorant Garamond', serif; font-size: 20px; margin-bottom: 8px;">Produção e edição</p>
+      <p style="font-size: 13px; font-weight: 300; color: var(--cinza); line-height: 1.7;"><strong style="color: var(--preto);">Editora com IA</strong> edita o material bruto, aplicando simulação de mobília quando o imóvel está vazio. <strong style="color: var(--preto);">Daniela</strong> edita os vídeos de autoridade gravados na sessão quinzenal.</p>
+    </div>
+    <div style="background: var(--offwhite); padding: 28px 32px;">
+      <p style="font-size: 9px; letter-spacing: 0.2em; text-transform: uppercase; color: var(--dourado); margin-bottom: 10px;">Segunda, quarta e sexta</p>
+      <p style="font-family: 'Cormorant Garamond', serif; font-size: 20px; margin-bottom: 8px;">Publicação nos 3 canais</p>
+      <p style="font-size: 13px; font-weight: 300; color: var(--cinza); line-height: 1.7;"><strong style="color: var(--preto);">Daniela</strong> publica seguindo o cronograma de cada canal, monitora engajamento e ajusta estratégia conforme necessário.</p>
+    </div>
+    <div style="background: var(--preto); padding: 28px 32px;">
+      <p style="font-size: 9px; letter-spacing: 0.2em; text-transform: uppercase; color: var(--dourado); margin-bottom: 10px;">A cada 15 dias</p>
+      <p style="font-family: 'Cormorant Garamond', serif; font-size: 20px; color: var(--offwhite); margin-bottom: 8px;">Tráfego pago do imóvel escolhido</p>
+      <p style="font-size: 13px; font-weight: 300; color: rgba(250,250,247,0.6); line-height: 1.7;">A cada quinze dias, um imóvel é selecionado para receber tráfego pago, totalizando <strong style="color: var(--dourado);">2 campanhas por mês</strong>. <strong style="color: var(--offwhite);">Daniela</strong> monta toda a estrutura da campanha, segmentação de público, criativo e acompanhamento de resultado, subindo o anúncio através do próprio conteúdo já publicado ou de uma landing page dedicada.</p>
+    </div>
+    <div style="background: var(--preto); padding: 28px 32px;">
+      <p style="font-size: 9px; letter-spacing: 0.2em; text-transform: uppercase; color: var(--dourado); margin-bottom: 10px;">Uma vez por mês</p>
+      <p style="font-family: 'Cormorant Garamond', serif; font-size: 20px; color: var(--offwhite); margin-bottom: 8px;">Reunião de alinhamento</p>
+      <p style="font-size: 13px; font-weight: 300; color: rgba(250,250,247,0.6); line-height: 1.7;">Relatório de resultados, ajustes de estratégia, e definição de prioridades para o mês seguinte.</p>
+    </div>
+  </div>
+</section>
+
+<div class="divider"></div>
+
+<!-- PALESTRA PARA OS CORRETORES -->
+<section id="corretores">
+  <p class="section-eyebrow">Alinhamento de equipe</p>
+  <h2 class="section-title">Uma conversa para que<br>todos <em>remem na mesma direção.</em></h2>
+  <p class="section-body">Antes de qualquer execução, uma sessão presencial com os 11 corretores para alinhar expectativas e o básico de como contribuir com o processo.</p>
+
+  <div style="margin-top: 40px; display: flex; flex-direction: column; gap: 2px; background: var(--cinza-claro);">
+    <div style="background: var(--offwhite); padding: 28px 32px;">
+      <p style="font-family: 'Cormorant Garamond', serif; font-size: 18px; font-weight: 500; margin-bottom: 8px;">O que é a nova estratégia e por quê</p>
+      <p style="font-size: 13px; font-weight: 300; color: var(--cinza); line-height: 1.7;">Contexto geral: o que vai mudar na presença digital da imobiliária e o que cada corretor ganha com isso.</p>
+    </div>
+    <div style="background: var(--offwhite); padding: 28px 32px;">
+      <p style="font-family: 'Cormorant Garamond', serif; font-size: 18px; font-weight: 500; margin-bottom: 8px;">Como gravar o tour do imóvel</p>
+      <p style="font-size: 13px; font-weight: 300; color: var(--cinza); line-height: 1.7;">Orientações básicas e práticas de iluminação, enquadramento e o que mostrar primeiro, sem precisar de equipamento profissional.</p>
+    </div>
+    <div style="background: var(--offwhite); padding: 28px 32px;">
+      <p style="font-family: 'Cormorant Garamond', serif; font-size: 18px; font-weight: 500; margin-bottom: 8px;">Como funciona o fluxo de envio</p>
+      <p style="font-size: 13px; font-weight: 300; color: var(--cinza); line-height: 1.7;">Para onde mandar o material gravado, prazo de envio e o que esperar de volta.</p>
+    </div>
+    <div style="background: var(--offwhite); padding: 28px 32px;">
+      <p style="font-family: 'Cormorant Garamond', serif; font-size: 18px; font-weight: 500; margin-bottom: 8px;">Atendimento ao cliente que vem das redes</p>
+      <p style="font-size: 13px; font-weight: 300; color: var(--cinza); line-height: 1.7;">Boas práticas de resposta rápida e acolhedora para quem chega através do conteúdo publicado.</p>
+    </div>
+  </div>
+
+  <div style="background: var(--preto); padding: 40px; margin-top: 40px;">
+    <p style="font-size: 9px; letter-spacing: 0.2em; text-transform: uppercase; color: var(--dourado); margin-bottom: 8px;">Material exclusivo entregue na palestra</p>
+    <h3 style="font-family: 'Cormorant Garamond', serif; font-size: 24px; font-weight: 300; color: var(--offwhite); margin-bottom: 16px;">Um guia <em style="font-style: italic; color: var(--dourado);">próprio</em>, feito para a sua equipe.</h3>
+    <p style="font-size: 13px; font-weight: 300; color: rgba(250,250,247,0.6); line-height: 1.8; max-width: 600px;">Cada corretor recebe um material visual e prático, desenvolvido especificamente para essa operação: como gravar com qualidade usando só o celular, como se posicionar diante da câmera, e os princípios de neuromarketing por trás de como o cliente realmente decide ao ver um conteúdo. Não é um material genérico encontrado em qualquer lugar. É construído sob medida para elevar o padrão de cada corretor da equipe, e reforça, na prática, o nível do trabalho que está sendo entregue.</p>
+  </div>
+</section>
+
+<div class="divider"></div>
+
+<!-- INVESTIMENTO -->
+<section id="investimento">
+  <p class="section-eyebrow">Investimento</p>
+  <h2 class="section-title">Tudo que está<br><em>incluído nesse valor.</em></h2>
+
+  <div style="margin-top: 48px; display: grid; grid-template-columns: 1fr 1fr; gap: 2px; background: var(--cinza-claro);">
+    <div style="background: var(--preto); padding: 48px;">
+      <p style="font-size: 10px; letter-spacing: 0.2em; text-transform: uppercase; color: var(--dourado); margin-bottom: 16px;">Investimento mensal</p>
+      <p style="font-family: 'Cormorant Garamond', serif; font-size: 60px; font-weight: 300; color: var(--offwhite); line-height: 1; margin-bottom: 8px;"><span style="font-size: 20px; vertical-align: super;">R$</span> 750</p>
+      <p style="font-size: 12px; font-weight: 300; color: rgba(250,250,247,0.35); margin-bottom: 32px;">por mês · válido pelos primeiros 3 meses</p>
+      <ul style="list-style: none;">
+        <li style="font-size: 13px; font-weight: 300; color: rgba(250,250,247,0.65); padding: 8px 0; border-bottom: 1px solid rgba(250,250,247,0.08); display: flex; align-items: center; gap: 10px;"><span style="width: 4px; height: 4px; border-radius: 50%; background: var(--dourado); flex-shrink: 0;"></span>Gestão completa dos 3 canais</li>
+        <li style="font-size: 13px; font-weight: 300; color: rgba(250,250,247,0.65); padding: 8px 0; border-bottom: 1px solid rgba(250,250,247,0.08); display: flex; align-items: center; gap: 10px;"><span style="width: 4px; height: 4px; border-radius: 50%; background: var(--dourado); flex-shrink: 0;"></span>Sessão de gravação quinzenal presencial</li>
+        <li style="font-size: 13px; font-weight: 300; color: rgba(250,250,247,0.65); padding: 8px 0; border-bottom: 1px solid rgba(250,250,247,0.08); display: flex; align-items: center; gap: 10px;"><span style="width: 4px; height: 4px; border-radius: 50%; background: var(--dourado); flex-shrink: 0;"></span>Edição dos vídeos de autoridade</li>
+        <li style="font-size: 13px; font-weight: 300; color: rgba(250,250,247,0.65); padding: 8px 0; border-bottom: 1px solid rgba(250,250,247,0.08); display: flex; align-items: center; gap: 10px;"><span style="width: 4px; height: 4px; border-radius: 50%; background: var(--dourado); flex-shrink: 0;"></span>2 landing pages de imóveis por mês</li>
+        <li style="font-size: 13px; font-weight: 300; color: rgba(250,250,247,0.65); padding: 8px 0; border-bottom: 1px solid rgba(250,250,247,0.08); display: flex; align-items: center; gap: 10px;"><span style="width: 4px; height: 4px; border-radius: 50%; background: var(--dourado); flex-shrink: 0;"></span>2 tráfegos pagos por mês</li>
+        <li style="font-size: 13px; font-weight: 300; color: rgba(250,250,247,0.65); padding: 8px 0; border-bottom: 1px solid rgba(250,250,247,0.08); display: flex; align-items: center; gap: 10px;"><span style="width: 4px; height: 4px; border-radius: 50%; background: var(--dourado); flex-shrink: 0;"></span>Palestra de alinhamento com os corretores</li>
+        <li style="font-size: 13px; font-weight: 300; color: rgba(250,250,247,0.65); padding: 8px 0; display: flex; align-items: center; gap: 10px;"><span style="width: 4px; height: 4px; border-radius: 50%; background: var(--dourado); flex-shrink: 0;"></span>Reunião mensal de alinhamento e resultados</li>
+      </ul>
+    </div>
+    <div style="background: var(--offwhite); padding: 48px;">
+      <p style="font-family: 'Cormorant Garamond', serif; font-size: 22px; margin-bottom: 24px; line-height: 1.3;">Disponível sob demanda, fora do pacote</p>
+      <ul style="list-style: none;">
+        <li style="font-size: 13px; font-weight: 300; color: var(--cinza); padding: 10px 0; border-bottom: 1px solid var(--cinza-claro); display: flex; align-items: flex-start; gap: 10px;"><span style="color: var(--dourado); font-size: 11px; flex-shrink: 0; margin-top: 3px;">✓</span><span><strong style="color: var(--preto);">Landing page individual</strong> para corretor específico — R$100 cada</span></li>
+        <li style="font-size: 13px; font-weight: 300; color: var(--cinza); padding: 10px 0; display: flex; align-items: flex-start; gap: 10px;"><span style="color: var(--dourado); font-size: 11px; flex-shrink: 0; margin-top: 3px;">✓</span><span><strong style="color: var(--preto);">Tráfego pago individual</strong> para imóvel específico de um corretor — R$100 cada</span></li>
+      </ul>
+      <p style="font-size: 12px; font-weight: 300; color: var(--cinza); margin-top: 32px; line-height: 1.7; font-style: italic;">Cobrado diretamente com o corretor interessado, sem passar pelo valor do pacote principal.</p>
+    </div>
+  </div>
+</section>
+
+<!-- PRÓXIMOS PASSOS / CTA -->
+<div style="background: var(--offwhite); padding: 88px 48px; text-align: center; border-top: 1px solid var(--cinza-claro);">
+  <p style="font-size: 10px; letter-spacing: 0.25em; text-transform: uppercase; color: var(--dourado); margin-bottom: 20px;">Próximo passo</p>
+  <h2 style="font-family: 'Cormorant Garamond', serif; font-size: clamp(28px, 4vw, 42px); font-weight: 400; line-height: 1.25; margin-bottom: 20px;">Pronto para começar a<br><em style="font-style: italic; color: var(--dourado);">construir esse endereço?</em></h2>
+  <p style="font-size: 14px; font-weight: 300; color: var(--cinza); max-width: 460px; margin: 0 auto 40px; line-height: 1.8;">Ao confirmar, alinhamos a data de início, a data de pagamento e enviamos o contrato com tudo que está descrito nesta proposta, para assinatura.</p>
+  <a href="https://wa.me/5511944906572?text=Oi%20Daniela%2C%20vi%20a%20proposta%20completa%20e%20quero%20seguir%20com%20o%20projeto.%20Vamos%20come%C3%A7ar%21" target="_blank" style="display: inline-block; background: var(--preto); color: var(--dourado); text-decoration: none; padding: 18px 44px; font-size: 13px; letter-spacing: 0.1em; text-transform: uppercase; border: 1px solid var(--dourado);">Vamos começar</a>
+</div>
+
+<!-- ASSINATURA -->
+<div style="background: var(--preto); padding: 88px 48px; text-align: center;">
+  <img src="data:image/png;base64,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" style="width: 64px; height: 64px; margin: 0 auto 24px; display: block;" alt="Daniela Paiva">
+  <p style="font-family: 'Cormorant Garamond', serif; font-size: 26px; font-weight: 300; color: var(--offwhite); margin-bottom: 4px;">Daniela Paiva</p>
+  <p style="font-size: 11px; letter-spacing: 0.2em; text-transform: uppercase; color: var(--dourado); margin-bottom: 36px;">Estrategista Digital</p>
+  <p style="font-family: 'Cormorant Garamond', serif; font-size: 20px; font-style: italic; font-weight: 300; color: rgba(250,250,247,0.45); max-width: 440px; margin: 0 auto 44px; line-height: 1.6;">"O endereço do seu sonho não aparece por acaso. Ele é construído, episódio por episódio, semana após semana."</p>
+  <div style="display: flex; justify-content: center; gap: 40px; flex-wrap: wrap;">
+    <div><label style="display: block; font-size: 9px; letter-spacing: 0.2em; text-transform: uppercase; color: var(--dourado); margin-bottom: 4px;">Instagram</label><span style="font-size: 13px; color: rgba(250,250,247,0.5);">@danielapaiva.co</span></div>
+    <div><label style="display: block; font-size: 9px; letter-spacing: 0.2em; text-transform: uppercase; color: var(--dourado); margin-bottom: 4px;">WhatsApp</label><span style="font-size: 13px; color: rgba(250,250,247,0.5);">(11) 94490-6572</span></div>
+  </div>
+</div>
+
+<script>
+function showCanal(idx, btn) {
+  document.querySelectorAll('#canais .tab-content').forEach(t => t.classList.remove('active'));
+  document.querySelectorAll('#canais .tab-btn').forEach(b => b.classList.remove('active'));
+  document.getElementById('canal-' + idx).classList.add('active');
+  btn.classList.add('active');
+}
+function showDia(idx, btn) {
+  document.querySelectorAll('#formato .tab-content').forEach(t => t.classList.remove('active'));
+  document.querySelectorAll('#formato .tab-btn').forEach(b => b.classList.remove('active'));
+  document.getElementById('dia-' + idx).classList.add('active');
+  btn.classList.add('active');
+}
+</script>
+
+</body>
+</html>
